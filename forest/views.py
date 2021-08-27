@@ -1,3 +1,43 @@
-from django.shortcuts import render
+import datetime
+import random
 
-# Create your views here.
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from rest_framework import permissions
+
+from forest.models import Tree, Event, Forest, TREE_SPECIES
+from forest.serializers import TreeSerializer, EventSerializer
+
+
+class ForestViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Forest.objects.all().order_by('name')
+    serializer_class = TreeSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class TreeViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Tree.objects.all().order_by('area')
+    serializer_class = TreeSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+
+
+
+
+

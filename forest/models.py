@@ -25,6 +25,34 @@ TREE_STATE = (
     ('C', 'Critical'),
 )
 
+# TREE_SPECIES = (
+#     ('A', 'Ash'),
+#     ('D', 'Alder'),
+#     ('B', 'Beech'),
+#     ('C', 'Chestnut tree'),
+#     ('E', 'Elm'),
+#     ('F', 'Fir'),
+#     ('H', 'Hornbeam'),
+#     ('L', 'Larch'),
+#     ('M', 'Maple'),
+#     ('O', 'Oak'),
+#     ('P', 'Pine'),
+#     ('S', 'Spruce'),
+#     ('W', 'Wild Cherry'),
+# )
+
+TREE_SPECIES = (
+    ('S', 'Spruce'),
+    ('P', 'Pine'),
+    ('B', 'Beech'),
+    ('O', 'Oak'),
+    ('F', 'Fir'),
+    ('L', 'Larch'),
+    ('A', 'Ash'),
+    ('D', 'Alder'),
+    ('M', 'Maple'),
+)
+
 
 class Forest(models.Model):
     name = models.CharField(max_length=30)
@@ -35,20 +63,19 @@ class Forest(models.Model):
 
 class Tree(models.Model):
     alive = models.BooleanField(default=True)
-    common_name = models.CharField(max_length=50)
-    genus = models.CharField(max_length=30)
-    species = models.CharField(max_length=30)
+    species = models.CharField(max_length=1, choices=TREE_SPECIES)
     lon = models.FloatField()
     lat = models.FloatField()
     nickname = models.CharField(max_length=30, null=True, blank=True)
     forest = models.ForeignKey(Forest, null=True, on_delete=models.CASCADE, related_name="trees")
-    area_nb = models.IntegerField()
-    planted_date = models.DateField(default=date.today)
+    area: int = models.IntegerField()
+    # planted_date = models.DateField(default=date.today)
+    age = models.IntegerField(default=1)
     size = models.CharField(max_length=1, choices=TREE_SIZES, default='S')
     state = models.CharField(max_length=1, choices=TREE_STATE, default='H')
 
     def __str__(self):
-        return f"{self.common_name} {self.id}, area {self.area_nb}"
+        return f"{self.species} {self.id}, area {self.area}"
 
 
 class Event(models.Model):
@@ -58,7 +85,7 @@ class Event(models.Model):
     date = models.DateField(default=date.today)
 
     def __str__(self):
-        return f"{self.get_type_display()} on {self.tree.common_name} {self.tree_id}, {self.date}"
+        return f"{self.get_type_display()} on {self.tree.species} {self.tree_id}, {self.date}"
 
 
 
