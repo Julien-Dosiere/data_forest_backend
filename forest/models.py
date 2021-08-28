@@ -68,14 +68,14 @@ class Tree(models.Model):
     lat = models.FloatField()
     nickname = models.CharField(max_length=30, null=True, blank=True)
     forest = models.ForeignKey(Forest, null=True, on_delete=models.CASCADE, related_name="trees")
-    area: int = models.IntegerField()
+    area = models.IntegerField()
     # planted_date = models.DateField(default=date.today)
     age = models.IntegerField(default=1)
     size = models.CharField(max_length=1, choices=TREE_SIZES, default='S')
     state = models.CharField(max_length=1, choices=TREE_STATE, default='H')
 
     def __str__(self):
-        return f"{self.species} {self.id}, area {self.area}"
+        return f"{self.get_species_display()} {self.id}, area {self.area}"
 
 
 class Event(models.Model):
