@@ -1,1 +1,1 @@
-web: gunicorn data_forest_backend.wgsi
+web: gunicorn data_forest_backend.wsgi
