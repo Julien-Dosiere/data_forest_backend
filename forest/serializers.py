@@ -3,7 +3,7 @@ from rest_framework import serializers
 from forest.models import Tree, Event, Forest
 
 
-class ForestSerializer(serializers.HyperlinkedModelSerializer):
+class ForestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Forest
         fields = [

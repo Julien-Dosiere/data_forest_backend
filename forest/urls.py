@@ -4,7 +4,7 @@ from rest_framework import routers
 from forest import views, seeder, analytics
 
 router = routers.DefaultRouter()
-router.register(r'forest', views.ForestViewSet)
+router.register(r'forests', views.ForestViewSet)
 router.register(r'trees', views.TreeViewSet)
 router.register(r'events', views.EventViewSet)
 

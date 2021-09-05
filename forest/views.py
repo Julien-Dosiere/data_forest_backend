@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 
 from forest.models import Tree, Event, Forest, TREE_SPECIES
-from forest.serializers import TreeSerializer, EventSerializer
+from forest.serializers import TreeSerializer, EventSerializer, ForestSerializer
 
 
 class ForestViewSet(viewsets.ModelViewSet):
@@ -14,7 +14,7 @@ class ForestViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Forest.objects.all().order_by('name')
-    serializer_class = TreeSerializer
+    serializer_class = ForestSerializer
     permission_classes = [permissions.AllowAny]
 
 

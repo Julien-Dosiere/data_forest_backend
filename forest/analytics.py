@@ -13,8 +13,8 @@ def get_frame(request):
         if request.method != 'POST':
             raise ValueError('Incorrect Request')
 
-        x_data = get_data_type(request.POST.get('x_data'))
-        y_data = get_data_type(request.POST.get('y_data'))
+        rows = get_data_type(request.POST.get('rows'))
+        columns = get_data_type(request.POST.get('columns'))
 
         forest_id = request.POST.get('forest_id')
         if not forest_id.isnumeric():
@@ -26,12 +26,16 @@ def get_frame(request):
         df = pd.DataFrame.from_records(query)
         pivot = df.pivot_table(
             values='id',
-            columns=y_data,
-            index=x_data,
+            columns=columns,
+            index=rows,
             margins=True,
             fill_value=0,
             aggfunc=pd.Series.nunique)
-        return HttpResponse(pivot.to_json())
+
+        if request.POST.get('format') == 'html':
+            return HttpResponse(pivot.to_html())
+        else:
+            return HttpResponse(pivot.to_json())
     except ValueError as error:
         return HttpResponse(error)
 
@@ -40,7 +44,7 @@ def get_data_type(input: str):
     if input in DataType._value2member_map_:
         return input
     else:
-        raise ValueError('Incorrect x_data or y_data value, accepted value are species, area, age, size, state, alive')
+        raise ValueError('Incorrect rows or columns data type, accepted value are species, area, age, size, state, alive')
 
 
 class DataType(Enum):

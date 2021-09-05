@@ -58,7 +58,7 @@ class Tree(models.Model):
     state = models.CharField(max_length=20, choices=TREE_STATE, default='H')
 
     def __str__(self):
-        return f"{self.get_species_display()} {self.id}, area {self.area}"
+        return f"{self.species} {self.id}, area {self.area}"
 
 
 class Event(models.Model):
