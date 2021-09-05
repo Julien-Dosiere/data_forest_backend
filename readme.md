@@ -12,8 +12,8 @@ It is built on the Django Rest Framework and uses Pandas for data processing.
 
 #### GET /seeds
 Generates a new random forest and populates with a maximum of 10 000 trees. 
-It should return the id of the newly created forest.
-
+`It should return the id of the newly created forest.
+`
 #### POST /analytics
 Returns a pivot table containing trees related data. The table is generated according the specified parameters:
 - forest_id: the id of the forest to select, must be a number.
