@@ -6,9 +6,13 @@ This backend part allows the input of new data and provides statistics that woul
 
 It is built on the Django Rest Framework and uses Pandas for data processing.
 
+Deployed version available __[here](https://jd-data-forest.herokuapp.com)__
 
 
 ## API endpoints:
+
+#### GET /admin
+Access to Django admin interface (for deployed version username: admin, password: password)
 
 #### GET /seeds
 Generates a new random forest and populates with a maximum of 10 000 trees. 
