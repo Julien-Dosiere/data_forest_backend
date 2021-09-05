@@ -25,6 +25,9 @@ Returns a pivot table containing trees related data. The table is generated acco
 Accepted value are "species", "area", "age", "size", "state", "alive".
 - rows: the type of data that would be used as rows in the pivot table. 
 Accepted value are "species", "area", "age", "size", "state", "alive".
+- format: the format of the return pivot table. 
+Accepted value is "html", default is json.
+
 
 ### REST API
 #### GET | POST | UPDATE | DELETE /forests/<id?>
