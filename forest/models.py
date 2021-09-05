@@ -54,8 +54,8 @@ class Tree(models.Model):
     area = models.IntegerField()
     # planted_date = models.DateField(default=date.today)
     age = models.IntegerField(default=1)
-    size = models.CharField(max_length=20, choices=TREE_SIZES, default='S')
-    state = models.CharField(max_length=20, choices=TREE_STATE, default='H')
+    size = models.CharField(max_length=20, choices=TREE_SIZES, default='Small')
+    state = models.CharField(max_length=20, choices=TREE_STATE, default='Healthy')
 
     def __str__(self):
         return f"{self.species} {self.id}, area {self.area}"
