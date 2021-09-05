@@ -10,13 +10,13 @@ MAX_FOREST_TREE = 10000
 
 def seeds(request):
     Forest.objects.all().delete()
-    generate_forest()
-    return HttpResponse('Seeding Completed')
+    new_forest_id = generate_forest()
+    return HttpResponse(f'New Forest seeded, forest id: {new_forest_id}')
 
 
-def generate_forest():
-    black_forest = Forest(name='black_forest')
-    black_forest.save()
+def generate_forest() -> int:
+    new_forest = Forest(name='black_forest')
+    new_forest.save()
 
 
     forest_trees_total = random.randint(MIN_FOREST_TREE, MAX_FOREST_TREE)
@@ -27,9 +27,11 @@ def generate_forest():
     max_area_trees = round(forest_trees_total / 9)
     min_area_trees = round(max_area_trees / 3)
 
-    tree_prototype: Tree = Tree(forest=black_forest)
+    tree_prototype: Tree = Tree(forest=new_forest)
 
     area_seeder(max_area_trees, min_area_trees, tree_prototype)
+
+    return new_forest.id
 
 
 def area_seeder(max_area_trees, min_area_trees, tree_prototype: Tree):

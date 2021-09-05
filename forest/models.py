@@ -3,12 +3,10 @@ from datetime import date
 
 from django.db import models
 
-# Create your models here.
-
 TREE_SIZES = (
-    ('S', 'Small'),
-    ('M', 'Medium'),
-    ('L', 'Large'),
+    ('Small', 'Small'),
+    ('Medium', 'Medium'),
+    ('Large', 'Large'),
 )
 
 EVENT_TYPE = (
@@ -20,37 +18,22 @@ EVENT_TYPE = (
 )
 
 TREE_STATE = (
-    ('H', 'Healthy'),
-    ('W', 'Worrying'),
-    ('C', 'Critical'),
+    ('Healthy', 'Healthy'),
+    ('Worrying', 'Worrying'),
+    ('Critical', 'Critical'),
 )
 
-# TREE_SPECIES = (
-#     ('A', 'Ash'),
-#     ('D', 'Alder'),
-#     ('B', 'Beech'),
-#     ('C', 'Chestnut tree'),
-#     ('E', 'Elm'),
-#     ('F', 'Fir'),
-#     ('H', 'Hornbeam'),
-#     ('L', 'Larch'),
-#     ('M', 'Maple'),
-#     ('O', 'Oak'),
-#     ('P', 'Pine'),
-#     ('S', 'Spruce'),
-#     ('W', 'Wild Cherry'),
-# )
 
 TREE_SPECIES = (
-    ('S', 'Spruce'),
-    ('P', 'Pine'),
-    ('B', 'Beech'),
-    ('O', 'Oak'),
-    ('F', 'Fir'),
-    ('L', 'Larch'),
-    ('A', 'Ash'),
-    ('D', 'Alder'),
-    ('M', 'Maple'),
+    ('Spruce', 'Spruce'),
+    ('Pine', 'Pine'),
+    ('Beech', 'Beech'),
+    ('Oak', 'Oak'),
+    ('Fir', 'Fir'),
+    ('Larch', 'Larch'),
+    ('Ash', 'Ash'),
+    ('Alder', 'Alder'),
+    ('Maple', 'Maple'),
 )
 
 
@@ -63,7 +46,7 @@ class Forest(models.Model):
 
 class Tree(models.Model):
     alive = models.BooleanField(default=True)
-    species = models.CharField(max_length=1, choices=TREE_SPECIES)
+    species = models.CharField(max_length=20, choices=TREE_SPECIES)
     lon = models.FloatField()
     lat = models.FloatField()
     nickname = models.CharField(max_length=30, null=True, blank=True)
@@ -71,8 +54,8 @@ class Tree(models.Model):
     area = models.IntegerField()
     # planted_date = models.DateField(default=date.today)
     age = models.IntegerField(default=1)
-    size = models.CharField(max_length=1, choices=TREE_SIZES, default='S')
-    state = models.CharField(max_length=1, choices=TREE_STATE, default='H')
+    size = models.CharField(max_length=20, choices=TREE_SIZES, default='S')
+    state = models.CharField(max_length=20, choices=TREE_STATE, default='H')
 
     def __str__(self):
         return f"{self.get_species_display()} {self.id}, area {self.area}"
@@ -86,6 +69,8 @@ class Event(models.Model):
 
     def __str__(self):
         return f"{self.get_type_display()} on {self.tree.species} {self.tree_id}, {self.date}"
+
+
 
 
 
