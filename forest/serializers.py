@@ -7,6 +7,7 @@ class ForestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Forest
         fields = [
+            'id',
             'name',
         ]
 
@@ -15,6 +16,7 @@ class TreeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tree
         fields = [
+            'id',
             'alive',
             'species',
             'lon',
@@ -32,6 +34,7 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Event
         fields = [
+            'id',
             'tree',
             'type',
             'details',
