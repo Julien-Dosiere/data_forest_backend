@@ -14,12 +14,16 @@ Deployed version available __[here](https://jd-data-forest.herokuapp.com)__
 #### GET /admin
 Access to Django admin interface (for deployed version username: admin, password: password)
 
-#### GET /seeds
+#### POST /seeds
 Generates a new random forest and populates with a maximum of 10 000 trees. 
-`It should return the id of the newly created forest.
-`
+Needs a "name" parameter (form-data) to set the newly generated forest name.
+It should return the id of the newly created forest.
+
+#### GET /drop
+Delete all forests, destroying all associated data.
+
 #### POST /analytics
-Returns a pivot table containing trees related data. The table is generated according the specified parameters:
+Returns a pivot table containing trees related data. The table is generated according the specified parameters (form-data):
 - forest_id: the id of the forest to select, must be a number.
 - columns: the type of data that would be used as columns in the pivot table. 
 Accepted value are "species", "area", "age", "size", "state", "alive".
