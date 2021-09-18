@@ -15,4 +15,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('seeds', seeder.seeds),
     path('analytics', analytics.get_frame),
+    path('drop', views.drop_all),
 ]

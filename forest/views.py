@@ -4,6 +4,7 @@ import random
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from django.http import HttpResponse
 
 from forest.models import Tree, Event, Forest, TREE_SPECIES
 from forest.serializers import TreeSerializer, EventSerializer, ForestSerializer
@@ -34,6 +35,16 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [permissions.AllowAny]
+
+
+def drop_all(request):
+    try:
+        Forest.objects.all().delete()
+    except Exception as error:
+        return HttpResponse(error)
+    return HttpResponse(f'All forests deleted')
+
+
 
 
 
