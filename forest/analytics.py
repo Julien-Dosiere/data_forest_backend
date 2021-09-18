@@ -11,7 +11,7 @@ from forest.models import Tree
 def get_frame(request):
     try:
         if request.method != 'POST':
-            raise ValueError('Incorrect Request')
+            raise ValueError('Incorrect Request, try POST instead')
 
         rows = get_data_type(request.POST.get('rows'))
         columns = get_data_type(request.POST.get('columns'))

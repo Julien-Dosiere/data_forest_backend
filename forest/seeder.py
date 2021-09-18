@@ -9,13 +9,17 @@ MAX_FOREST_TREE = 10000
 
 
 def seeds(request):
-    Forest.objects.all().delete()
-    new_forest_id = generate_forest()
-    return HttpResponse(f'New Forest seeded, forest id: {new_forest_id}')
+    # Forest.objects.all().delete()
+    if request.method != 'POST':
+        raise ValueError('Incorrect Request, try POST instead')
+
+    forest_name = request.POST.get('name') or 'Unnamed Forest'
+    new_forest_id = generate_forest(forest_name)
+    return HttpResponse(f'New Forest seeded, id: {new_forest_id}, name: {forest_name}')
 
 
-def generate_forest() -> int:
-    new_forest = Forest(name='black_forest')
+def generate_forest(forest_name: str) -> int:
+    new_forest = Forest(name=forest_name)
     new_forest.save()
 
 
