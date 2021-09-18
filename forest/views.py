@@ -42,7 +42,7 @@ def drop_all(request):
         Forest.objects.all().delete()
     except Exception as error:
         return HttpResponse(error)
-
+    return HttpResponse()
 
 
 
