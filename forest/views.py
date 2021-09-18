@@ -41,8 +41,8 @@ def drop_all(request):
     try:
         Forest.objects.all().delete()
     except Exception as error:
-        return JsonResponse(error)
-    return JsonResponse(f'All forests deleted')
+        return HttpResponse(error)
+
 
 
 
