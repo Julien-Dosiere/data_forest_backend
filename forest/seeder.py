@@ -2,15 +2,14 @@ import random
 
 from django.http import JsonResponse, HttpResponse
 
-from forest.models import Forest, TREE_SPECIES, Tree, TREE_SIZES, TREE_STATE
+from forest.models import Forest, TREE_SPECIES, Tree, TREE_STATE
 
 MIN_FOREST_TREE = 1000
 MAX_FOREST_TREE = 4000
 AREA_NUMBER = 4
 
 
-def seeds(request):
-    # Forest.objects.all().delete()
+def seeds(request) -> HttpResponse:
     if request.method != 'POST':
         raise ValueError('Incorrect Request, try POST instead')
 
@@ -23,11 +22,9 @@ def generate_forest(forest_name: str) -> int:
     new_forest = Forest(name=forest_name)
     new_forest.save()
 
-
     forest_trees_total = random.randint(MIN_FOREST_TREE, MAX_FOREST_TREE)
-    print(f"seeding maximum of {forest_trees_total} trees...")
 
-    forest_available_trees = forest_trees_total
+    print(f"seeding maximum of {forest_trees_total} trees...")
 
     max_area_trees = round(forest_trees_total / AREA_NUMBER)
     min_area_trees = round(max_area_trees / 3)
@@ -40,9 +37,8 @@ def generate_forest(forest_name: str) -> int:
 
 
 def area_seeder(max_area_trees, min_area_trees, tree_prototype: Tree):
-    for area in range(1, 10, 1):
+    for area in range(1, AREA_NUMBER, 1):
         area_trees_amount = random.randint(min_area_trees, max_area_trees)
-        # print(f'area {area}: {area_trees_amount}')
         tree_prototype.area = area
         species_seeder(area_trees_amount, tree_prototype)
 
@@ -52,7 +48,6 @@ def species_seeder(area_trees_amount: int, tree_prototype: Tree):
     for species in TREE_SPECIES:
         min_species_trees = round(area_trees_amount / 4)
         species_trees_amount = random.randint(min_species_trees, area_trees_amount)
-        # print(f'species {species[0]}: {species_trees_amount}')
         tree_prototype.species = species[0]
         state_seeder(species_trees_amount, tree_prototype, area_taken_coordinates)
         area_trees_amount -= species_trees_amount
