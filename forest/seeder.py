@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from forest.models import Forest, TREE_SPECIES, Tree, TREE_STATE
 
 MIN_FOREST_TREE = 1000
-MAX_FOREST_TREE = 4000
+MAX_FOREST_TREE = 8000
 AREA_NUMBER = 4
 
 
@@ -47,7 +47,8 @@ def species_seeder(area_trees_amount: int, tree_prototype: Tree):
     area_taken_coordinates = set()
     for species in TREE_SPECIES:
         min_species_trees = round(area_trees_amount / 5)
-        species_trees_amount = random.randint(min_species_trees, area_trees_amount)
+        max_species_trees = round(area_trees_amount * 0.80)
+        species_trees_amount = random.randint(min_species_trees, max_species_trees)
         tree_prototype.species = species[0]
         state_seeder(species_trees_amount, tree_prototype, area_taken_coordinates)
         area_trees_amount -= species_trees_amount
