@@ -37,7 +37,7 @@ def generate_forest(forest_name: str) -> int:
 
 
 def area_seeder(max_area_trees, min_area_trees, tree_prototype: Tree):
-    for area in range(1, AREA_NUMBER, 1):
+    for area in range(1, AREA_NUMBER + 1, 1):
         area_trees_amount = random.randint(min_area_trees, max_area_trees)
         tree_prototype.area = area
         species_seeder(area_trees_amount, tree_prototype)
