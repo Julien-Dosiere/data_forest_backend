@@ -5,7 +5,8 @@ from django.http import JsonResponse, HttpResponse
 from forest.models import Forest, TREE_SPECIES, Tree, TREE_SIZES, TREE_STATE
 
 MIN_FOREST_TREE = 1000
-MAX_FOREST_TREE = 10000
+MAX_FOREST_TREE = 4000
+AREA_NUMBER = 4
 
 
 def seeds(request):
@@ -28,7 +29,7 @@ def generate_forest(forest_name: str) -> int:
 
     forest_available_trees = forest_trees_total
 
-    max_area_trees = round(forest_trees_total / 9)
+    max_area_trees = round(forest_trees_total / AREA_NUMBER)
     min_area_trees = round(max_area_trees / 3)
 
     tree_prototype: Tree = Tree(forest=new_forest)
@@ -86,7 +87,6 @@ def generate_tree(age_group: tuple[int, int], tree_prototype: Tree, area_taken_c
     generate_tree_coordinates(tree_prototype, area_taken_coordinates)
 
     plant_tree(tree_prototype)
-
 
 
 def generate_tree_age(age_group, tree_prototype):

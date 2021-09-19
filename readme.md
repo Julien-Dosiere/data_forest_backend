@@ -16,7 +16,7 @@ Access to Django admin interface (for deployed version username: admin, password
 
 #### POST /seeds
 Generates a new random forest and populates with a maximum of 10 000 trees. 
-Needs a "name" parameter (form-data) to set the newly generated forest name.
+Requires a "name" parameter (form-data) to set the newly generated forest name.
 It should return the id of the newly created forest.
 
 #### GET /drop
