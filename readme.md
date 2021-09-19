@@ -6,7 +6,7 @@ This backend part allows the input of new data and provides statistics that woul
 
 It is built on the Django Rest Framework and uses Pandas for data processing.
 
-Deployed version available __[here](https://jd-data-forest.herokuapp.com)__
+Deployed version (with frontend app) available __[here](https://data-forest-e79ed.web.app/)__
 
 
 ## API endpoints:

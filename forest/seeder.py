@@ -46,7 +46,7 @@ def area_seeder(max_area_trees, min_area_trees, tree_prototype: Tree):
 def species_seeder(area_trees_amount: int, tree_prototype: Tree):
     area_taken_coordinates = set()
     for species in TREE_SPECIES:
-        min_species_trees = round(area_trees_amount / 4)
+        min_species_trees = round(area_trees_amount / 5)
         species_trees_amount = random.randint(min_species_trees, area_trees_amount)
         tree_prototype.species = species[0]
         state_seeder(species_trees_amount, tree_prototype, area_taken_coordinates)
