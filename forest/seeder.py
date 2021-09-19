@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from forest.models import Forest, TREE_SPECIES, Tree, TREE_STATE
 
 MIN_FOREST_TREE = 1000
-MAX_FOREST_TREE = 8000
+MAX_FOREST_TREE = 6000
 AREA_NUMBER = 4
 
 
